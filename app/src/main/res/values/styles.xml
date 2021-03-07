@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ColorDotView">
+        <attr name="paletteColor" format="color" />
+    </declare-styleable>
+
+    <style name="custom_toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="elevationOverlayEnabled">false</item>
+    </style>
+</resources>
