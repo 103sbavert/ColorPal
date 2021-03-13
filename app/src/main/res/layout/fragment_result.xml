@@ -19,8 +19,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Choose A Color"
+        app:subtitle="Here are the colors you asked for!"
+        app:subtitleTextColor="?colorOnSurface"
         app:titleTextAppearance="?attr/textAppearanceHeadline4"
-        app:titleTextColor="?colorOnSurface" />
+        app:titleTextColor="?colorPrimary" />
 
     <ImageView
         android:id="@+id/selected_image_view"

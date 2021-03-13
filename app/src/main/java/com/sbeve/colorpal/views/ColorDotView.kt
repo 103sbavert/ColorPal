@@ -7,8 +7,13 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import com.sbeve.colorpal.R
+import kotlin.properties.Delegates
 
-class ColorDotView(context: Context, attrs: AttributeSet) : View(context, attrs) {
+class ColorDotView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr) {
 
     var fillColor = Color.LTGRAY
         set(value) {
@@ -17,20 +22,16 @@ class ColorDotView(context: Context, attrs: AttributeSet) : View(context, attrs)
             invalidate()
         }
 
-    private val paintFill = Paint().apply {
-        isAntiAlias = true
-        color = fillColor
-        style = Paint.Style.FILL
-    }
+    private val paintFill = Paint(Paint.ANTI_ALIAS_FLAG)
 
-    private var cx: Float = width / 2F
-    private var cy: Float = height / 2F
+    private var cx by Delegates.notNull<Float>()
+    private var cy by Delegates.notNull<Float>()
     private val radius: Float
         //get the bigger one of the two
         get() = if (cx > cy) cy else cx
 
     init {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ColorDotView, 0, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ColorDotView, defStyleAttr, 0)
         fillColor = a.getColor(R.styleable.ColorDotView_paletteColor, fillColor)
         a.recycle()
     }
@@ -41,6 +42,11 @@ class ColorDotView(context: Context, attrs: AttributeSet) : View(context, attrs)
     }
 
     override fun onDraw(canvas: Canvas) {
+        paintFill.style = Paint.Style.FILL
+        paintFill.color = fillColor
+        canvas.drawCircle(cx, cy, radius, paintFill)
+        paintFill.style = Paint.Style.STROKE
+        paintFill.color = Color.BLACK
         canvas.drawCircle(cx, cy, radius, paintFill)
     }
 }

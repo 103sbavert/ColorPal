@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="Pick An Image"
         app:titleTextAppearance="?attr/textAppearanceHeadline4"
-        app:titleTextColor="?colorOnSurface" />
+        app:titleTextColor="?colorPrimary" />
 
     <Button
         android:id="@+id/open_gallery_button"

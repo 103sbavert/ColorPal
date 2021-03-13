@@ -2,6 +2,5 @@
     <string name="app_name">Color Pal</string>
     <string name="open_gallery_button_text">open gallery</string>
     <string name="content_description_of_selected_image">The image selected by the user</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="gallery_image_description">One of the images stored in the user\'s gallery</string>
 </resources>

@@ -8,7 +8,7 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar"
-        style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        style="?toolbarStyle"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="?colorSurface"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="Select An Image"
         app:titleTextAppearance="?attr/textAppearanceHeadline4"
-        app:titleTextColor="?colorOnSurface" />
+        app:titleTextColor="?colorPrimary" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

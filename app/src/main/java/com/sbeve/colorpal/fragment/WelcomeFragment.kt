@@ -9,29 +9,32 @@ import android.util.Log
 import android.view.View
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.sbeve.colorpal.MainActivity
 import com.sbeve.colorpal.R
 import com.sbeve.colorpal.databinding.FragmentWelcomeBinding
 
-private const val STORAGE_PERMISSION_REQUEST_CODE = 2
-private const val USER_PERMISSION_ACTION_KEY = "user_permission_action"
-private const val SELECTED_LAYOUT_KEY = "selected_layout"
 
 class WelcomeFragment : Fragment(R.layout.fragment_welcome), SharedPreferences.OnSharedPreferenceChangeListener {
-    lateinit var binding: FragmentWelcomeBinding
+    companion object {
+        private const val STORAGE_PERMISSION_REQUEST_CODE = 2
+        private const val USER_PERMISSION_ACTION_KEY = "user_permission_action"
+        private const val SELECTED_LAYOUT_KEY = "selected_layout"
+    }
+
+    private lateinit var binding: FragmentWelcomeBinding
 
     // parent activity as mainActivity to access the contents inside
     private val mainActivity: MainActivity by lazy {
         requireActivity() as MainActivity
     }
-    private val viewModel: WelcomeViewModel by viewModels()
-    private val isStoragePermissionGranted: Boolean
-        get() {
-            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                mainActivity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-            } else true
-        }
+
+    /*    private val viewModel: WelcomeViewModel by viewModels()
+        private val isStoragePermissionGranted: Boolean
+            get() {
+                return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mainActivity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                } else true
+            }*/
     private val shouldShowRequestPermissionRationale: Boolean
         get() {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

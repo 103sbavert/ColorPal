@@ -20,12 +20,13 @@ class RecyclerViewAdapter(private val dataSet: List<Uri>, private val imageViewC
             }
         }
 
-        fun setImageToImageView(uri: Uri) {
+        fun setUpImageView(uri: Uri) {
             Glide.with(binding.root)
                 .load(uri)
                 .centerCrop()
-                .into(binding.galleryImage)
-            binding.galleryImage.setOnClickListener {
+                .into(binding.galleryImageView)
+
+            binding.galleryImageView.setOnClickListener {
                 imageViewClickListener.onImageClick(uri)
             }
         }
@@ -34,7 +35,7 @@ class RecyclerViewAdapter(private val dataSet: List<Uri>, private val imageViewC
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RVViewHolder.inflateLayout(parent, imageViewClickListener)
 
     override fun onBindViewHolder(holder: RVViewHolder, position: Int) {
-        holder.setImageToImageView(dataSet[position])
+        holder.setUpImageView(dataSet[position])
     }
 
     override fun getItemCount() = dataSet.size

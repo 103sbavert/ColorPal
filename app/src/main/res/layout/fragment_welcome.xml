@@ -16,9 +16,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Pick A Layout"
+        app:subtitle="Pick a layout"
+        app:subtitleTextColor="?colorOnSurface"
+        app:title="Welcome"
         app:titleTextAppearance="?attr/textAppearanceHeadline4"
-        app:titleTextColor="?colorOnSurface" />
+        app:titleTextColor="?colorPrimary" />
 
     <RadioGroup
         android:id="@+id/pick_layout_choice_group"
