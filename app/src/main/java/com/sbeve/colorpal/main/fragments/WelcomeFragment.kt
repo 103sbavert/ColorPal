@@ -1,17 +1,16 @@
-package com.sbeve.colorpal.fragment
+package com.sbeve.colorpal.main.fragments
 
 import android.Manifest
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
-import com.sbeve.colorpal.MainActivity
 import com.sbeve.colorpal.R
 import com.sbeve.colorpal.databinding.FragmentWelcomeBinding
+import com.sbeve.colorpal.main.MainActivity
 
 
 class WelcomeFragment : Fragment(R.layout.fragment_welcome), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -28,13 +27,16 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome), SharedPreferences.O
         requireActivity() as MainActivity
     }
 
-    /*    private val viewModel: WelcomeViewModel by viewModels()
-        private val isStoragePermissionGranted: Boolean
-            get() {
-                return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    mainActivity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-                } else true
-            }*/
+    /*
+    private val viewModel: WelcomeViewModel by viewModels()
+    private val isStoragePermissionGranted: Boolean
+        get() {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mainActivity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+            } else true
+        }
+    */
+
     private val shouldShowRequestPermissionRationale: Boolean
         get() {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -64,10 +66,12 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome), SharedPreferences.O
             1 -> mainActivity.navController.navigate(WelcomeFragmentDirections.actionWelcomeFragmentToGalleryFragment())
             2 -> mainActivity.navController.navigate(WelcomeFragmentDirections.actionWelcomeFragmentToPickerFragment())
         }
+
         /**
          * set shared preference listener to disable or enable nextButton
          * or permissionButton based on the value of [userPermissionAction]
          */
+
         mainActivity.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
 
         updateButtonStates()
@@ -102,29 +106,18 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome), SharedPreferences.O
         }
     }
 
-    /*override fun onResume() {
-        super.onResume()
-        if (isStoragePermissionGranted) {
-            mainActivity.sharedPreferences.edit().putInt(USER_PERMISSION_ACTION_KEY, 1).apply()
-        } else {
-            if (!shouldShowRequestPermissionRationale)
-                mainActivity.sharedPreferences.edit().putInt(USER_PERMISSION_ACTION_KEY, 2).apply()
-            else
-                mainActivity.sharedPreferences.edit().putInt(USER_PERMISSION_ACTION_KEY, 0).apply()
-        }
-    }
-    */
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             STORAGE_PERMISSION_REQUEST_CODE -> {
                 when (grantResults[0]) {
                     // if the permission is granted, update the sharedPreference
                     // so the sharedPreferencesListener would update the UI
-                    PackageManager.PERMISSION_GRANTED -> mainActivity.sharedPreferences.edit().putInt(USER_PERMISSION_ACTION_KEY, 1).apply()
+                    PackageManager.PERMISSION_GRANTED -> {
+                        mainActivity.sharedPreferences.edit().putInt(USER_PERMISSION_ACTION_KEY, 1).apply()
+                    }
                     // if the permission is not granted, check if the user selected
                     // "Deny" or "Deny and don't ask again"
-                    PackageManager.PERMISSION_DENIED ->
+                    PackageManager.PERMISSION_DENIED -> {
                         // if [shouldShowPermissionRationale] is true, we know the
                         // user has selected "Deny"
                         if (!shouldShowRequestPermissionRationale)
@@ -133,6 +126,7 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome), SharedPreferences.O
                         // user has selected "Deny and don't ask again"
                         else
                             mainActivity.sharedPreferences.edit().putInt(USER_PERMISSION_ACTION_KEY, 0).apply()
+                    }
                 }
             }
         }
@@ -155,7 +149,6 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome), SharedPreferences.O
      * is initialized to enable or disable nextButton and permissionButton
      */
     private fun updateButtonStates() {
-        Log.e("uupa", userPermissionAction.toString())
         when (userPermissionAction) {
             0 -> {
                 binding.nextButton.isEnabled = false

@@ -1,4 +1,4 @@
-package com.sbeve.colorpal.fragment
+package com.sbeve.colorpal.main.fragments
 
 import android.graphics.Bitmap
 import android.net.Uri
@@ -24,16 +24,13 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentResultBinding.bind(view)
-
         setBitmapFromUri(
             args.selectedImageUri,
             binding.selectedImageView.layoutParams.width,
             binding.selectedImageView.layoutParams.height
         )
-
         viewModel.selectedImageBitmap.observe(viewLifecycleOwner) {
-            binding.selectedImageView.setImageBitmap(it)
-            generatePaletteFromBitmap(it)
+            handleBitmap(it)
         }
     }
 
@@ -48,9 +45,10 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         }
     }
 
-    private fun generatePaletteFromBitmap(bitmap: Bitmap) {
+    private fun handleBitmap(bitmap: Bitmap) {
+        binding.selectedImageView.setImageBitmap(bitmap)
         Palette.from(bitmap).generate { palette ->
-            populateTheLayout(palette!!)
+            palette?.let { populateTheLayout(it) }
         }
     }
 
@@ -68,7 +66,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             if (each == NO_COLOR_FOUND_CODE) continue
             val colorNameBinding = ColorNameLayoutBinding.inflate(layoutInflater)
             colorNameBinding.colorCircle.fillColor = each
-            colorNameBinding.colorCode.text = Integer.toHexString(each).toString()
+            colorNameBinding.colorCode.text = "#" + (Integer.toHexString(each).toString()).toUpperCase()
             binding.colors.addView(colorNameBinding.root)
         }
     }

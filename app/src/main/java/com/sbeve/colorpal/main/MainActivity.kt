@@ -1,4 +1,4 @@
-package com.sbeve.colorpal
+package com.sbeve.colorpal.main
 
 import android.content.Context
 import android.content.SharedPreferences

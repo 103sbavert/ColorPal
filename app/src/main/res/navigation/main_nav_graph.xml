@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/galleryFragment"
-        android:name="com.sbeve.colorpal.fragment.GalleryFragment"
+        android:name="com.sbeve.colorpal.main.fragments.GalleryFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_gallery">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.sbeve.colorpal.fragment.ResultFragment"
+        android:name="com.sbeve.colorpal.main.fragments.ResultFragment"
         android:label="ResultFragment">
         <argument
             android:name="selectedImageUri"
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.sbeve.colorpal.fragment.WelcomeFragment"
+        android:name="com.sbeve.colorpal.main.fragments.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome">
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/pickerFragment"
-        android:name="com.sbeve.colorpal.fragment.PickerFragment"
+        android:name="com.sbeve.colorpal.main.fragments.PickerFragment"
         android:label="fragment_picker"
         tools:layout="@layout/fragment_picker">
         <action

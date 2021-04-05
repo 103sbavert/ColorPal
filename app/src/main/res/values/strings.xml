@@ -3,4 +3,5 @@
     <string name="open_gallery_button_text">open gallery</string>
     <string name="content_description_of_selected_image">The image selected by the user</string>
     <string name="gallery_image_description">One of the images stored in the user\'s gallery</string>
+    <string name="welcome_fragment_title"><b>Color</b>Pal</string>
 </resources>

@@ -1,13 +1,13 @@
-package com.sbeve.colorpal.fragment
+package com.sbeve.colorpal.main.fragments
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.sbeve.colorpal.MainActivity
 import com.sbeve.colorpal.R
 import com.sbeve.colorpal.databinding.FragmentPickerBinding
+import com.sbeve.colorpal.main.MainActivity
 
 private const val OPEN_GALLERY_REQUEST_CODE = 2
 

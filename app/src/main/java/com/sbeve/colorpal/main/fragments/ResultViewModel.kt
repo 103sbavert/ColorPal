@@ -1,4 +1,4 @@
-package com.sbeve.colorpal.fragment
+package com.sbeve.colorpal.main.fragments
 
 import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.GalleryFragment">
+    tools:context=".main.fragments.GalleryFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="Select An Image"
         app:titleTextAppearance="?attr/textAppearanceHeadline4"
-        app:titleTextColor="?colorPrimary" />
+        app:titleTextColor="@color/layout_selector_foreground_color" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

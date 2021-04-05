@@ -4,53 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.WelcomeFragment">
+    tools:context=".main.fragments.WelcomeFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        style="@style/Widget.MaterialComponents.Toolbar.Primary"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="?colorSurface"
-        android:elevation="10dp"
-        android:gravity="bottom"
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_fragment_title"
+        android:textAppearance="?textAppearanceHeadline4"
+        app:layout_constraintBottom_toTopOf="@+id/pick_layout_choice_group"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:subtitle="Pick a layout"
-        app:subtitleTextColor="?colorOnSurface"
-        app:title="Welcome"
-        app:titleTextAppearance="?attr/textAppearanceHeadline4"
-        app:titleTextColor="?colorPrimary" />
+        app:layout_constraintVertical_bias="0.153" />
 
     <RadioGroup
         android:id="@+id/pick_layout_choice_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
         android:checkedButton="@id/gallery"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/gallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Gallery" />
+            style="@style/welcome_fragment_custom_radio_buttons"
+            android:drawableTop="@drawable/gallery_icon"
+            android:text="Gallery Like UI" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/manual"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Upload Image" />
+            style="@style/welcome_fragment_custom_radio_buttons"
+            android:drawableTop="@drawable/manual_icon"
+            android:text="Upload Manually" />
     </RadioGroup>
 
     <com.google.android.material.button.MaterialButton
@@ -59,19 +50,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="true"
-        android:text="Give Storage Permission"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Grant Storage Permission"
+        app:cornerRadius="16dp"
+        app:icon="@drawable/ic_baseline_storage_24"
+        app:layout_constraintBottom_toBottomOf="@+id/next_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.126"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pick_layout_choice_group"
-        app:layout_constraintVertical_bias="0.221" />
+        app:layout_constraintTop_toTopOf="@+id/next_button" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Next Button"
+        android:contentDescription="Next"
         android:enabled="false"
         android:src="@drawable/ic_baseline_arrow_forward_ios_24"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -80,4 +72,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
