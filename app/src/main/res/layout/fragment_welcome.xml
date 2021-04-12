@@ -6,18 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".main.fragments.WelcomeFragment">
 
-    <TextView
-        android:id="@+id/Title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_fragment_title"
-        android:textAppearance="?textAppearanceHeadline4"
-        app:layout_constraintBottom_toTopOf="@+id/pick_layout_choice_group"
+        android:background="?colorPrimary"
+        android:gravity="center_vertical"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.153" />
+        app:layout_constraintVertical_bias="0.000">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/welcome_fragment_title"
+            android:textAppearance="?textAppearanceHeadline4"
+            android:textColor="?colorOnPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selected_image_view" />
+    </LinearLayout>
 
     <RadioGroup
         android:id="@+id/pick_layout_choice_group"
@@ -29,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/top_bar">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/gallery"
@@ -70,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintTop_toBottomOf="@+id/pick_layout_choice_group"
+        app:layout_constraintVertical_bias="0.272" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

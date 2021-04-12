@@ -4,13 +4,11 @@
         <attr name="paletteColor" format="color" />
     </declare-styleable>
 
-    <style name="custom_toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
-        <item name="elevationOverlayEnabled">false</item>
-    </style>
-
     <style name="welcome_fragment_custom_radio_buttons">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
+        <item name="android:state_checkable">true</item>
+        <item name="android:checkable">true</item>
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/selector_background</item>

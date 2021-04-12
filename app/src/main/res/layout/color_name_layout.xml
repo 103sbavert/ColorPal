@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="6dp">
 
     <com.sbeve.colorpal.views.ColorDotView
         android:id="@+id/color_circle"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
         android:layout_gravity="center_vertical|start" />
 
     <TextView
@@ -17,8 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:layout_gravity="center_vertical|end"
         android:gravity="center_vertical|start"
-        android:textAppearance="?textAppearanceHeadline5"
+        android:textAppearance="?textAppearanceHeadline6"
         tools:text="@string/app_name" />
 </LinearLayout>

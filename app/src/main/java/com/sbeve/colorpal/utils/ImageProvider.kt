@@ -14,13 +14,16 @@ object ImageProvider {
     }
 
     fun getAllImages(context: Context, imageSource: ImageSource): ArrayList<Uri> {
-        val baseUri = if (imageSource == ImageSource.External) EXTERNAL_CONTENT_BASE_URI else INTERNAL_CONTENT_BASE_URI
+        val baseUri = when (imageSource) {
+            ImageSource.Internal -> INTERNAL_CONTENT_BASE_URI
+            ImageSource.External -> EXTERNAL_CONTENT_BASE_URI
+        }
         val projection = arrayOf(MediaStore.Images.Media._ID)
         val imageUris = arrayListOf<Uri>()
         val cursor = context.contentResolver.query(baseUri, projection, null, null, null)
+        val columnIndex = cursor?.getColumnIndex(MediaStore.Images.Media._ID)
         while (cursor?.moveToNext() == true) {
-            val columnIndex = cursor.getColumnIndex(MediaStore.Images.Media._ID)
-            val imageId = cursor.getInt(columnIndex)
+            val imageId = columnIndex?.let { cursor.getInt(it) }
             val currentImageUri = Uri.withAppendedPath(baseUri, imageId.toString())
             imageUris.add(currentImageUri)
         }
