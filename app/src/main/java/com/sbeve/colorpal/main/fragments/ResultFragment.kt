@@ -13,6 +13,8 @@ import com.bumptech.glide.Glide
 import com.sbeve.colorpal.R
 import com.sbeve.colorpal.databinding.ColorNameLayoutBinding
 import com.sbeve.colorpal.databinding.FragmentResultBinding
+import com.sbeve.colorpal.main.MainActivity
+import com.sbeve.colorpal.main.fragments.ResultViewModel.Companion.NO_COLOR_FOUND_CODE
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
@@ -21,9 +23,17 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
     private lateinit var binding: FragmentResultBinding
     private val args: ResultFragmentArgs by navArgs()
     private val viewModel: ResultViewModel by viewModels()
+    private val mainActivity: MainActivity by lazy {
+        requireActivity() as MainActivity
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentResultBinding.bind(view)
+
+        binding.materialToolbar.setNavigationOnClickListener {
+            mainActivity.navController.navigateUp()
+        }
+
         setBitmapFromUri(
             args.selectedImageUri,
             binding.selectedImageView.layoutParams.width,

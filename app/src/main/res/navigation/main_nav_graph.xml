@@ -3,12 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navgraph"
-    app:startDestination="@id/welcomeFragment">
+    app:startDestination="@id/galleryFragment">
 
     <fragment
         android:id="@+id/galleryFragment"
         android:name="com.sbeve.colorpal.main.fragments.GalleryFragment"
-        android:label="fragment_main"
         tools:layout="@layout/fragment_gallery">
         <action
             android:id="@+id/action_galleryFragment_to_resultFragment"
@@ -16,35 +15,9 @@
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.sbeve.colorpal.main.fragments.ResultFragment"
-        android:label="ResultFragment">
+        android:name="com.sbeve.colorpal.main.fragments.ResultFragment">
         <argument
             android:name="selectedImageUri"
             app:argType="android.net.Uri" />
-    </fragment>
-    <fragment
-        android:id="@+id/welcomeFragment"
-        android:name="com.sbeve.colorpal.main.fragments.WelcomeFragment"
-        android:label="fragment_welcome"
-        tools:layout="@layout/fragment_welcome">
-        <action
-            android:id="@+id/action_welcomeFragment_to_galleryFragment"
-            app:destination="@id/galleryFragment"
-            app:popUpTo="@id/welcomeFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_welcomeFragment_to_pickerFragment"
-            app:destination="@id/pickerFragment"
-            app:popUpTo="@id/welcomeFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/pickerFragment"
-        android:name="com.sbeve.colorpal.main.fragments.PickerFragment"
-        android:label="fragment_picker"
-        tools:layout="@layout/fragment_picker">
-        <action
-            android:id="@+id/action_pickerFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
     </fragment>
 </navigation>

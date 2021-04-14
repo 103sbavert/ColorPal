@@ -6,47 +6,86 @@
     android:layout_height="match_parent"
     tools:context=".main.fragments.GalleryFragment">
 
-    <LinearLayout
-        android:id="@+id/top_bar"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar"
+        style="@style/Toolbar.ColorPal"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?colorPrimary"
-        android:gravity="center_vertical"
-        android:padding="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="?actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.000">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_image_24" />
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Select An Image"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/toolbar_text"
             android:textAppearance="?textAppearanceHeadline4"
-            android:textColor="?colorOnPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selected_image_view" />
-    </LinearLayout>
+            android:textColor="@color/white" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="12dp"
-        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        android:layout_marginStart="12dp"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar"
-        app:spanCount="3"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
+        app:spanCount="2"
         tools:listitem="@layout/gallery_image" />
+
+    <LinearLayout
+        android:id="@+id/error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
+        app:layout_constraintVertical_bias="0.500"
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_permissions_title"
+            android:textAlignment="center"
+            android:textAppearance="?textAppearanceHeadline6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@string/no_permissions_subtitle"
+            android:textAlignment="center"
+            android:textAppearance="?textAppearanceSubtitle1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/grant_permissions_button"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/grant_storage_permission_button_text"
+            app:icon="@drawable/ic_baseline_storage_24" />
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/open_gallery_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/upload_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.973" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import com.sbeve.colorpal.R
 import kotlin.properties.Delegates
@@ -16,11 +17,6 @@ class ColorDotView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     var fillColor = Color.LTGRAY
-        set(value) {
-            field = value
-            paintFill.color = value
-            invalidate()
-        }
 
     private val paintFill = Paint(Paint.ANTI_ALIAS_FLAG)
 
@@ -34,6 +30,7 @@ class ColorDotView @JvmOverloads constructor(
         val a = context.obtainStyledAttributes(attrs, R.styleable.ColorDotView, defStyleAttr, 0)
         fillColor = a.getColor(R.styleable.ColorDotView_paletteColor, fillColor)
         a.recycle()
+        Log.e("", "init block called")
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -42,6 +39,7 @@ class ColorDotView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
+        Log.e("", "ondraw called")
         paintFill.style = Paint.Style.FILL
         paintFill.color = fillColor
         canvas.drawCircle(cx, cy, radius, paintFill)

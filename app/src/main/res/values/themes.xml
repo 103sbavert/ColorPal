@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.ColorPal" parent="Base.Theme.ColorPal">
         <!-- Primary brand color. -->
@@ -13,7 +13,6 @@
     </style>
 
     <style name="Base.Theme.ColorPal" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:statusBarColor">?colorPrimary</item>
     </style>
 </resources>

@@ -4,17 +4,6 @@
         <attr name="paletteColor" format="color" />
     </declare-styleable>
 
-    <style name="welcome_fragment_custom_radio_buttons">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:state_checkable">true</item>
-        <item name="android:checkable">true</item>
-        <item name="android:button">@null</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/selector_background</item>
-        <item name="useMaterialThemeColors">false</item>
-        <item name="android:padding">45dp</item>
-        <item name="android:textColor">@color/layout_selector_foreground_color</item>
-        <item name="android:textSize">20sp</item>
-    </style>
+    <style name="Toolbar.ColorPal" parent="Widget.MaterialComponents.Toolbar.Primary"></style>
+
 </resources>

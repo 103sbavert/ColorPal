@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="6dp">
+    android:paddingVertical="12dp">
 
     <com.sbeve.colorpal.views.ColorDotView
         android:id="@+id/color_circle"

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.sbeve.colorpal.databinding.ActivityMainBinding
@@ -17,9 +17,11 @@ class MainActivity : AppCompatActivity() {
     private val appBarConfiguration: AppBarConfiguration by lazy {
         AppBarConfiguration(navController.graph)
     }
-
+    private val navHostFragment by lazy {
+        supportFragmentManager.findFragmentById(mainActivityBinding.mainNavHost.id) as NavHostFragment
+    }
     val navController by lazy {
-        findNavController(mainActivityBinding.mainNavHost.id)
+        navHostFragment.navController
     }
 
     val sharedPreferences: SharedPreferences by lazy {

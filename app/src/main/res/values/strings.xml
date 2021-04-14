@@ -3,5 +3,8 @@
     <string name="open_gallery_button_text">open gallery</string>
     <string name="content_description_of_selected_image">The image selected by the user</string>
     <string name="gallery_image_description">One of the images stored in the user\'s gallery</string>
-    <string name="welcome_fragment_title"><b>Color</b>Pal</string>
+    <string name="toolbar_text"><b>Color</b>Pal</string>
+    <string name="no_permissions_title">Storage access denied</string>
+    <string name="no_permissions_subtitle">Storage access was not provided so images from the gallery are not being shown. Tap on the button below to grant storage permissions</string>
+    <string name="grant_storage_permission_button_text">Grant storage permission</string>
 </resources>
