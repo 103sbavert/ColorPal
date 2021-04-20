@@ -15,17 +15,14 @@ import androidx.fragment.app.viewModels
 import com.sbeve.colorpal.R
 import com.sbeve.colorpal.databinding.FragmentGalleryBinding
 import com.sbeve.colorpal.main.MainActivity
+import com.sbeve.colorpal.main.fragments.GalleryViewModel.Companion.IS_FIRST_TIME_KEY
+import com.sbeve.colorpal.main.fragments.GalleryViewModel.Companion.OPEN_GALLERY_REQUEST_CODE
+import com.sbeve.colorpal.main.fragments.GalleryViewModel.Companion.STORAGE_PERMISSION_REQUEST_CODE
+import com.sbeve.colorpal.main.fragments.GalleryViewModel.Companion.USER_PERMISSION_ACTION_KEY
 import com.sbeve.colorpal.recyclerview_utils.RVAdapter
 
 class GalleryFragment : Fragment(R.layout.fragment_gallery), SharedPreferences.OnSharedPreferenceChangeListener, RVAdapter.ImageViewClickListener {
 
-    // static constants used within the code
-    companion object {
-        private const val OPEN_GALLERY_REQUEST_CODE = 2
-        private const val IS_FIRST_TIME_KEY = "is_first_time"
-        private const val STORAGE_PERMISSION_REQUEST_CODE = 3
-        private const val USER_PERMISSION_ACTION_KEY = "user_permission_action"
-    }
 
     private lateinit var binding: FragmentGalleryBinding
     private val viewModel: GalleryViewModel by viewModels()
@@ -59,6 +56,10 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SharedPreferences.O
         if (mainActivity.sharedPreferences.getBoolean(IS_FIRST_TIME_KEY, true)) {
             requestStorageAccess()
             mainActivity.sharedPreferences.edit().putBoolean(IS_FIRST_TIME_KEY, false).apply()
+        } else {
+
+            // determine what should be shown on the screen based on whether the user has granted storage access
+            determineAndUpdateLayout()
         }
 
         // when the viewModel is done loading the list of image uris, set up the recycler view
@@ -68,9 +69,6 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SharedPreferences.O
         }
 
         mainActivity.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
-
-        // determine what should be shown on the screen based on whether the user has granted storage access
-        determineAndUpdateLayout()
 
         // let the user manually grant storage access if they deny it the first time the app was opened
         binding.grantPermissionsButton.setOnClickListener {
@@ -164,8 +162,8 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SharedPreferences.O
     }
 
     private fun showStorageAccessDeniedMessage() {
-        binding.recyclerView.visibility = View.GONE
-        binding.errorMessage.visibility = View.VISIBLE
+        binding.galleryImagesRecyclerView.visibility = View.GONE
+        binding.storageAccessNotGrantedMessage.visibility = View.VISIBLE
     }
 
     // open the system picker and set the mime type to image/* so only images are shown
@@ -178,9 +176,9 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SharedPreferences.O
 
     // hide the error message and set up the recycler view with the provided list
     private fun setUpRecyclerView(list: ArrayList<Uri>) {
-        binding.errorMessage.visibility = View.GONE
-        binding.recyclerView.visibility = View.VISIBLE
-        binding.recyclerView.adapter = RVAdapter(list, this)
+        binding.storageAccessNotGrantedMessage.visibility = View.GONE
+        binding.galleryImagesRecyclerView.visibility = View.VISIBLE
+        binding.galleryImagesRecyclerView.adapter = RVAdapter(list, this)
     }
 
     // request storage access

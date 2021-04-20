@@ -17,7 +17,11 @@ class ColorDotView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     var fillColor = Color.LTGRAY
-    var outLineColor = Color.BLACK
+        set(value) {
+            field = value
+            invalidate()
+        }
+    private var outLineColor = Color.BLACK
 
     private val paintFill = Paint(Paint.ANTI_ALIAS_FLAG)
 

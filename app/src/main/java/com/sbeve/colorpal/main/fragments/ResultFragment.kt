@@ -1,22 +1,17 @@
 package com.sbeve.colorpal.main.fragments
 
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.palette.graphics.Palette
-import com.bumptech.glide.Glide
 import com.sbeve.colorpal.R
 import com.sbeve.colorpal.databinding.ColorNameLayoutBinding
 import com.sbeve.colorpal.databinding.FragmentResultBinding
 import com.sbeve.colorpal.main.MainActivity
 import com.sbeve.colorpal.main.fragments.ResultViewModel.Companion.NO_COLOR_FOUND_CODE
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 
 class ResultFragment : Fragment(R.layout.fragment_result) {
 
@@ -34,24 +29,14 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             mainActivity.navController.navigateUp()
         }
 
-        setBitmapFromUri(
+        viewModel.setBitmapFromUri(
+            this,
             args.selectedImageUri,
             binding.selectedImageView.layoutParams.width,
             binding.selectedImageView.layoutParams.height
         )
         viewModel.selectedImageBitmap.observe(viewLifecycleOwner) {
             handleBitmap(it)
-        }
-    }
-
-    private fun setBitmapFromUri(uri: Uri, width: Int, height: Int) {
-        lifecycleScope.launch(IO) {
-            val bitmap = Glide.with(this@ResultFragment)
-                .asBitmap()
-                .load(uri)
-                .submit(width, height)
-                .get()
-            viewModel.selectedImageBitmap.postValue(bitmap)
         }
     }
 
@@ -71,13 +56,13 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             palette.getVibrantColor(NO_COLOR_FOUND_CODE),
             palette.getDarkVibrantColor(NO_COLOR_FOUND_CODE)
         )
-        binding.colors.removeAllViews()
+        binding.colorsLinearLayout.removeAllViews()
         for (each in colors) {
             if (each == NO_COLOR_FOUND_CODE) continue
             val colorNameBinding = ColorNameLayoutBinding.inflate(layoutInflater)
             colorNameBinding.colorCircle.fillColor = each
             colorNameBinding.colorCode.text = "#" + (Integer.toHexString(each).toString()).toUpperCase()
-            binding.colors.addView(colorNameBinding.root)
+            binding.colorsLinearLayout.addView(colorNameBinding.root)
         }
     }
 }

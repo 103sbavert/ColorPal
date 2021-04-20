@@ -11,6 +11,13 @@ import kotlinx.coroutines.launch
 
 class GalleryViewModel : ViewModel() {
 
+    companion object {
+        const val OPEN_GALLERY_REQUEST_CODE = 2
+        const val IS_FIRST_TIME_KEY = "is_first_time"
+        const val STORAGE_PERMISSION_REQUEST_CODE = 3
+        const val USER_PERMISSION_ACTION_KEY = "user_permission_action"
+    }
+
     private val _listOfImageUris = MutableLiveData<ArrayList<Uri>>()
     val listOfImages: LiveData<ArrayList<Uri>>
         get() = _listOfImageUris

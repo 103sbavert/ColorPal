@@ -6,7 +6,7 @@
 
     <style name="rounded_image_view" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">5%</item>
+        <item name="cornerSize">7%</item>
     </style>
 
 </resources>
