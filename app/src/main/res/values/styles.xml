@@ -4,6 +4,9 @@
         <attr name="paletteColor" format="color" />
     </declare-styleable>
 
-    <style name="Toolbar.ColorPal" parent="Widget.MaterialComponents.Toolbar.Primary"></style>
+    <style name="rounded_image_view" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">5%</item>
+    </style>
 
 </resources>

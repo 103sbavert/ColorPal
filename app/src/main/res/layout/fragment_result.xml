@@ -9,7 +9,7 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar"
-        style="@style/Toolbar.ColorPal"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="0dp"
         android:layout_height="?actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,14 +26,15 @@
             android:textColor="@color/white" />
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/selected_image_view"
         android:layout_width="match_parent"
-        android:layout_height="216dp"
+        android:layout_height="300dp"
         android:layout_gravity="center"
         android:layout_margin="12dp"
         android:contentDescription="@string/content_description_of_selected_image"
         android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/rounded_image_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
