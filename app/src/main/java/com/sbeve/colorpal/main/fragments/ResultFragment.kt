@@ -12,6 +12,7 @@ import com.sbeve.colorpal.databinding.ColorNameLayoutBinding
 import com.sbeve.colorpal.databinding.FragmentResultBinding
 import com.sbeve.colorpal.main.MainActivity
 import com.sbeve.colorpal.main.fragments.ResultViewModel.Companion.NO_COLOR_FOUND_CODE
+import java.lang.Integer.toHexString
 
 class ResultFragment : Fragment(R.layout.fragment_result) {
 
@@ -42,7 +43,9 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
 
     private fun handleBitmap(bitmap: Bitmap) {
         binding.selectedImageView.setImageBitmap(bitmap)
-        Palette.from(bitmap).generate { palette ->
+        val builder = Palette.Builder(bitmap)
+        builder.maximumColorCount(64)
+        builder.generate { palette ->
             palette?.let { populateTheLayout(it) }
         }
     }
@@ -56,12 +59,13 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             palette.getVibrantColor(NO_COLOR_FOUND_CODE),
             palette.getDarkVibrantColor(NO_COLOR_FOUND_CODE)
         )
+
         binding.colorsLinearLayout.removeAllViews()
         for (each in colors) {
             if (each == NO_COLOR_FOUND_CODE) continue
             val colorNameBinding = ColorNameLayoutBinding.inflate(layoutInflater)
             colorNameBinding.colorCircle.fillColor = each
-            colorNameBinding.colorCode.text = "#" + (Integer.toHexString(each).toString()).toUpperCase()
+            colorNameBinding.colorCode.text = "#${toHexString(each).toUpperCase()}"
             binding.colorsLinearLayout.addView(colorNameBinding.root)
         }
     }

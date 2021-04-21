@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="?android:windowBackground"
     tools:context=".main.fragments.GalleryFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -29,19 +28,18 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/selected_image_view"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_gravity="center"
+        android:layout_width="400dp"
+        android:layout_height="0dp"
         android:layout_margin="12dp"
         android:contentDescription="@string/content_description_of_selected_image"
         android:scaleType="centerCrop"
-        app:shapeAppearanceOverlay="@style/rounded_image_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0"
+        app:shapeAppearanceOverlay="@style/rounded_image_view" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -49,8 +47,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selected_image_view"
+        app:layout_constraintStart_toEndOf="@+id/selected_image_view"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout

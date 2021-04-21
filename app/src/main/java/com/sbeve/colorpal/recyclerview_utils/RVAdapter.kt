@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sbeve.colorpal.databinding.GalleryImageBinding
 
-class RVAdapter(private val dataSet: ArrayList<Uri>, private val imageViewClickListener: ImageViewClickListener) :
+class RVAdapter(private var dataSet: ArrayList<Uri>, private val imageViewClickListener: ImageViewClickListener) :
     RecyclerView.Adapter<RVAdapter.RVViewHolder>() {
     class RVViewHolder(private val binding: GalleryImageBinding, private val imageViewClickListener: ImageViewClickListener) :
         RecyclerView.ViewHolder(binding.root) {

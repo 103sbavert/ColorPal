@@ -1,5 +1,6 @@
 package com.sbeve.colorpal.main.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.LiveData
@@ -7,9 +8,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sbeve.colorpal.utils.ImageProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GalleryViewModel : ViewModel() {
+@SuppressLint("StaticFieldLeak")
+@HiltViewModel
+class GalleryViewModel
+@Inject
+constructor(@ApplicationContext val applicationContext: Context) : ViewModel() {
 
     companion object {
         const val OPEN_GALLERY_REQUEST_CODE = 2
@@ -19,15 +28,18 @@ class GalleryViewModel : ViewModel() {
     }
 
     private val _listOfImageUris = MutableLiveData<ArrayList<Uri>>()
-    val listOfImages: LiveData<ArrayList<Uri>>
+    val listOfImagesUris: LiveData<ArrayList<Uri>>
         get() = _listOfImageUris
 
+
     // load all the images from the ImageLoader utility class asynchronously
-    fun loadUris(context: Context) {
-        viewModelScope.launch {
+    fun loadUrisToLiveData() {
+        viewModelScope.launch(IO) {
 
             // post the list of the Image Uris to the mutableLiveData to be observed from within the fragment
-            _listOfImageUris.postValue(ImageProvider.getAllImages(context, ImageProvider.ImageSource.External))
+            val listOfImageUris = ImageProvider.getAllImages(applicationContext, ImageProvider.ImageSource.External)
+            _listOfImageUris.postValue(listOfImageUris)
+
         }
     }
 }

@@ -16,6 +16,7 @@
         android:id="@+id/color_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textIsSelectable="true"
         android:layout_margin="8dp"
         android:gravity="center_vertical|start"
         android:textAppearance="?textAppearanceHeadline6"

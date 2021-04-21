@@ -51,6 +51,7 @@ class ColorDotView @JvmOverloads constructor(
         canvas.drawCircle(cx, cy, radius, paintFill)
         paintFill.style = Paint.Style.STROKE
         paintFill.color = outLineColor
-        canvas.drawCircle(cx, cy, radius - 1, paintFill)
+        paintFill.strokeWidth = 2F
+        canvas.drawCircle(cx, cy, radius - 2, paintFill)
     }
 }

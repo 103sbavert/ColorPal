@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
 class ResultViewModel : ViewModel() {
 
     companion object {
