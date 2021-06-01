@@ -21,6 +21,8 @@ class ResultViewModel : ViewModel() {
     val selectedImageBitmap: LiveData<Bitmap>
         get() = _selectedImageBitmap
 
+    // get the Uri, decode it with Glide on the IO dispatcher and post the generated value to the
+    // LiveData to be observed in the fragment
     fun setBitmapFromUri(fragment: Fragment, uri: Uri, width: Int, height: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             val bitmap = Glide.with(fragment)

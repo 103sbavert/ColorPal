@@ -16,7 +16,6 @@ class RVAdapter(private var dataSet: ArrayList<Uri>, private val imageViewClickL
         companion object {
             fun inflateLayout(parent: ViewGroup, imageViewClickListener: ImageViewClickListener): RVViewHolder {
                 val binding = GalleryImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
                 return RVViewHolder(binding, imageViewClickListener)
             }
         }

@@ -8,14 +8,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.sbeve.colorpal.databinding.ActivityMainBinding
-import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        const val MAIN_ACTIVITY_SHAREDPREFERENCE_KEY = "MainActivity"
+        const val MAIN_ACTIVITY_SHARED_PREFERENCE_KEY = "MainActivity"
     }
 
     private val mainActivityBinding by lazy {
@@ -32,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     val sharedPreferences: SharedPreferences by lazy {
-        getSharedPreferences(MAIN_ACTIVITY_SHAREDPREFERENCE_KEY, Context.MODE_PRIVATE)
+        getSharedPreferences(MAIN_ACTIVITY_SHARED_PREFERENCE_KEY, Context.MODE_PRIVATE)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

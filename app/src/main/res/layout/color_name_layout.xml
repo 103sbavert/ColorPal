@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingVertical="12dp">
+    android:paddingVertical="@dimen/medium_gap">
 
     <com.sbeve.colorpal.views.ColorDotView
         android:id="@+id/color_circle"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
+        android:layout_width="@dimen/color_circle_size"
+        android:layout_height="@dimen/color_circle_size"
         android:layout_gravity="center_vertical|start" />
 
     <TextView
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textIsSelectable="true"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/small_gap"
         android:gravity="center_vertical|start"
         android:textAppearance="?textAppearanceHeadline6"
         tools:text="@string/app_name" />

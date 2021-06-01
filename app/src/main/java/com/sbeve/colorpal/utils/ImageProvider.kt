@@ -3,6 +3,7 @@ package com.sbeve.colorpal.utils
 import android.content.Context
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
@@ -19,8 +20,14 @@ object ImageProvider {
         val returnedList = arrayListOf<Uri>()
         val projection = arrayOf(MediaStore.Images.Media._ID)
         var cursor: Cursor?
+        val sortOrder =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+                MediaStore.Images.Media.DATE_TAKEN + " DESC"
+            else
+                MediaStore.Images.Media.DATE_MODIFIED + " DESC"
+
         withContext(IO) {
-            cursor = context.contentResolver.query(imageSource.uri, projection, null, null, null)
+            cursor = context.contentResolver.query(imageSource.uri, projection, null, null, sortOrder)
         }
         val uriColumnIndex = cursor?.getColumnIndex(projection[0])
         withContext(Default) {

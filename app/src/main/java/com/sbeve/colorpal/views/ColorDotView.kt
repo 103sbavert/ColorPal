@@ -16,15 +16,15 @@ class ColorDotView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
+    // Set the initial color of fillColor to light gray
+    // invalidate and redraw the view everytime this color changes
     var fillColor = Color.LTGRAY
         set(value) {
             field = value
             invalidate()
         }
     private var outLineColor = Color.BLACK
-
     private val paintFill = Paint(Paint.ANTI_ALIAS_FLAG)
-
     private var cx by Delegates.notNull<Float>()
     private var cy by Delegates.notNull<Float>()
     private val radius: Float
@@ -32,10 +32,15 @@ class ColorDotView @JvmOverloads constructor(
         get() = if (cx > cy) cy else cx
 
     init {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ColorDotView, defStyleAttr, 0)
+
+        // get the ColorOnSurface color attribute from the theme to use it as the outline of the view
         val typedValue = TypedValue()
         context.theme.resolveAttribute(R.attr.colorOnSurface, typedValue, true)
         outLineColor = typedValue.data
+
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ColorDotView, defStyleAttr, 0)
+
+        // get the color specified in the xml and redraw the view with the inner circle using the extracted color
         fillColor = a.getColor(R.styleable.ColorDotView_paletteColor, fillColor)
         a.recycle()
     }

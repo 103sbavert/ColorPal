@@ -5,13 +5,13 @@
     "kind": "Directory"
   },
   "applicationId": "com.sbeve.colorpal",
-  "variantName": "processReleaseResources",
+  "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 3,
-      "versionName": "v1.1.0",
+      "versionCode": 4,
+      "versionName": "v1.2.0",
       "outputFile": "app-release.apk"
     }
   ]

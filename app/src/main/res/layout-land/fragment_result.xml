@@ -27,10 +27,10 @@
     </com.google.android.material.appbar.MaterialToolbar>
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/selected_image_view"
-        android:layout_width="400dp"
+        android:id="@+id/selected_image"
+        android:layout_width="@dimen/result_fragment_imageview_width"
         android:layout_height="0dp"
-        android:layout_margin="12dp"
+        android:layout_margin="@dimen/medium_gap"
         android:contentDescription="@string/content_description_of_selected_image"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,7 +47,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/selected_image_view"
+        app:layout_constraintStart_toEndOf="@+id/selected_image"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
         app:layout_constraintVertical_bias="0.0">
 
@@ -56,10 +56,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="12dp"
+            android:padding="@dimen/medium_gap"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selected_image_view" />
+            app:layout_constraintTop_toBottomOf="@+id/selected_image" />
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
