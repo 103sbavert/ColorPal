@@ -33,8 +33,8 @@ android {
         applicationId "com.sbeve.colorpal"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 4
-        versionName "v1.2.0"
+        versionCode 5
+        versionName "v1.3.0"
     }
 
     buildTypes {
