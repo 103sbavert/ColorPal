@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="isDarkTheme" format="boolean" />
     <declare-styleable name="ColorDotView">
         <attr name="paletteColor" format="color" />
     </declare-styleable>

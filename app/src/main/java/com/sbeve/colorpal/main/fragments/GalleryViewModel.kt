@@ -16,7 +16,6 @@ class GalleryViewModel : ViewModel() {
 
     companion object {
         const val IS_FIRST_TIME_KEY = "is_first_time"
-        const val USER_PERMISSION_ACTION_KEY = "user_permission_action"
     }
 
     @SuppressLint("StaticFieldLeak")

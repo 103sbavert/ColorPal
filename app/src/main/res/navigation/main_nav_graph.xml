@@ -9,16 +9,16 @@
         android:name="com.sbeve.colorpal.main.fragments.GalleryFragment"
         tools:layout="@layout/fragment_gallery">
         <action
-            android:id="@+id/action_galleryFragment_to_resultFragment"
-            app:destination="@id/resultFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_galleryFragment_to_resultDialog"
+            app:destination="@id/resultDialog" />
     </fragment>
-    <fragment
-        android:id="@+id/resultFragment"
-        android:name="com.sbeve.colorpal.main.fragments.ResultFragment">
+    <dialog
+        android:id="@+id/resultDialog"
+        android:name="com.sbeve.colorpal.main.fragments.ResultDialog"
+        android:label="dialog_result"
+        tools:layout="@layout/dialog_result">
         <argument
-            android:name="selectedImageUri"
+            android:name="uri"
             app:argType="android.net.Uri" />
-    </fragment>
+    </dialog>
 </navigation>

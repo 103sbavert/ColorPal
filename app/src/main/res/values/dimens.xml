@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="animation_duration">250</integer>
     <dimen name="moderate_gap">15dp</dimen>
     <dimen name="medium_gap">12dp</dimen>
     <dimen name="small_gap">8dp</dimen>
-    <dimen name="color_circle_size">40dp</dimen>
-    <dimen name="result_fragment_imageview_height">300dp</dimen>
-    <dimen name="result_fragment_imageview_width">400dp</dimen>
+    <dimen name="color_circle_size">50dp</dimen>
 </resources>

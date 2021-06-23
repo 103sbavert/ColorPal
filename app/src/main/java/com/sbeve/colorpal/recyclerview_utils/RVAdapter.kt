@@ -3,7 +3,6 @@ package com.sbeve.colorpal.recyclerview_utils
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sbeve.colorpal.databinding.GalleryImageBinding
@@ -21,14 +20,12 @@ class RVAdapter(private var dataSet: ArrayList<Uri>, private val imageViewClickL
         }
 
         fun setUpImageView(uri: Uri) {
-            Glide.with(binding.root)
+            Glide
+                .with(binding.root)
+                .asBitmap()
                 .load(uri)
-                .centerCrop()
                 .into(binding.galleryImageView)
-
-            binding.galleryImageView.setOnClickListener {
-                imageViewClickListener.onImageClick(uri, it as ImageView)
-            }
+            binding.galleryImageView.setOnClickListener { imageViewClickListener.onImageClick(uri) }
         }
     }
 
@@ -41,6 +38,6 @@ class RVAdapter(private var dataSet: ArrayList<Uri>, private val imageViewClickL
     override fun getItemCount() = dataSet.size
 
     interface ImageViewClickListener {
-        fun onImageClick(uri: Uri, imageView: ImageView)
+        fun onImageClick(uri: Uri)
     }
 }

@@ -1,18 +1,19 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.ColorPal" parent="Base.Theme.ColorPal">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryVariant">?colorPrimary</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/cyan_200</item>
-        <item name="colorSecondaryVariant">@color/cyan_700</item>
+        <item name="colorSecondary">@color/light_green</item>
+        <item name="colorSecondaryVariant">?colorSecondary</item>
         <item name="colorOnSecondary">@color/black</item>
-
+        <item name="isDarkTheme">false</item>
     </style>
 
     <style name="Base.Theme.ColorPal" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">?colorPrimary</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">?isDarkTheme</item>
     </style>
 </resources>

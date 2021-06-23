@@ -1,27 +1,25 @@
 package com.sbeve.colorpal.main.fragments
 
 import android.Manifest
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.animation.AlphaAnimation
-import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.sbeve.colorpal.R
 import com.sbeve.colorpal.databinding.FragmentGalleryBinding
 import com.sbeve.colorpal.main.MainActivity
 import com.sbeve.colorpal.main.fragments.GalleryViewModel.Companion.IS_FIRST_TIME_KEY
-import com.sbeve.colorpal.main.fragments.GalleryViewModel.Companion.USER_PERMISSION_ACTION_KEY
 import com.sbeve.colorpal.recyclerview_utils.RVAdapter
 
-class GalleryFragment : Fragment(R.layout.fragment_gallery), SharedPreferences.OnSharedPreferenceChangeListener, RVAdapter.ImageViewClickListener {
+class GalleryFragment : Fragment(R.layout.fragment_gallery), RVAdapter.ImageViewClickListener {
 
     private lateinit var binding: FragmentGalleryBinding
     private val viewModel: GalleryViewModel by viewModels()
@@ -30,7 +28,9 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SharedPreferences.O
     private lateinit var mainActivity: MainActivity
 
     private val getContentLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        if (uri != null) mainActivity.navController.navigate(GalleryFragmentDirections.actionGalleryFragmentToResultFragment(uri))
+        if (uri != null) {
+            mainActivity.navController.navigate(GalleryFragmentDirections.actionGalleryFragmentToResultDialog(uri))
+        }
     }
 
     private val requestPermissionLauncher =
@@ -48,18 +48,19 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SharedPreferences.O
         get() {
             val permission = ContextCompat.checkSelfPermission(mainActivity, Manifest.permission.READ_EXTERNAL_STORAGE)
             return if (permission == PackageManager.PERMISSION_GRANTED) {
-                Log.e("TAG", "userPermissionAction: 1")
+                Log.e("Gallery Fragment", "userPermissionAction: Allow")
                 1
             } else {
                 if (shouldShowRequestPermissionRationale) {
-                    Log.e("TAG", "userPermissionAction: 0")
+                    Log.e("Gallery Fragment", "userPermissionAction: Deny")
                     0
                 } else {
-                    Log.e("TAG", "userPermissionAction: -1")
+                    Log.e("Gallery Fragment", "userPermissionAction: Deny and don't ask again")
                     -1
                 }
             }
         }
+
     private val shouldShowRequestPermissionRationale: Boolean
         get() {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -96,7 +97,16 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SharedPreferences.O
             setUpRecyclerView(it)
         }
 
-        mainActivity.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
+        binding.galleryImagesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    if (binding.openSystemPickerButton.isExtended) binding.openSystemPickerButton.shrink()
+                } else if (dy < 0) {
+                    if (!binding.openSystemPickerButton.isExtended) binding.openSystemPickerButton.extend()
+                }
+            }
+        })
 
         // let the user manually grant storage access if they deny it the first time the app was opened
         binding.grantPermissionsButton.setOnClickListener {
@@ -109,25 +119,16 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SharedPreferences.O
         }
     }
 
-    //play an empty animation to keep the fragment from disappearing from the background when the enter animation for other fragments is playing
-    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int) = AlphaAnimation(1.0F, 1.0F).apply {
-        duration = resources.getInteger(R.integer.animation_duration).toLong()
+    override fun onResume() {
+        super.onResume()
+
+        determineAndUpdateLayout()
     }
 
-    // determine the layout again based on whether the user has given storage access and update the views
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        when (key) {
-            USER_PERMISSION_ACTION_KEY -> {
-                determineAndUpdateLayout()
-            }
-        }
-    }
+    override fun onImageClick(uri: Uri) {
 
-    override fun onImageClick(uri: Uri, imageView: ImageView) {
-
-        // navigate to the result fragment and pass in the uri for the image to be decoded with Glide again
-        // TODO: Possibly not decode the image twice and use the same bitmap in both the fragments
-        mainActivity.navController.navigate(GalleryFragmentDirections.actionGalleryFragmentToResultFragment(uri))
+        // navigate to the dialog fragment and pass in the uri for the image to be decoded with Glide again
+        findNavController().navigate(GalleryFragmentDirections.actionGalleryFragmentToResultDialog(uri))
     }
 
     private fun determineAndUpdateLayout() {

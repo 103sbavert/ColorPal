@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.sbeve.colorpal.utils
 
 import android.content.Context
