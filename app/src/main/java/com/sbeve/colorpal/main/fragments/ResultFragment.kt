@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.palette.graphics.Palette
+import androidx.transition.TransitionInflater
 import com.sbeve.colorpal.R
 import com.sbeve.colorpal.databinding.ColorNameLayoutBinding
 import com.sbeve.colorpal.databinding.FragmentResultBinding
@@ -31,6 +33,10 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         binding.materialToolbar.setNavigationOnClickListener {
             mainActivity.navController.navigateUp()
         }
+
+        ViewCompat.setTransitionName(binding.selectedImage, "large_image")
+        enterTransition = TransitionInflater.from(requireContext()).inflateTransition(R.transition.fade)
+        sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
 
         // get the bitmap from Uri from the args (passed by the gallery fragment) and pass in the
         // height and width of the image view that's going to show it

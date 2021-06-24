@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fade xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="@integer/animation_duration"
+    android:interpolator="@android:interpolator/accelerate_cubic">
+
+</fade>

@@ -4,6 +4,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sbeve.colorpal.databinding.GalleryImageBinding
@@ -26,8 +27,10 @@ class RVAdapter(private var dataSet: ArrayList<Uri>, private val imageViewClickL
                 .centerCrop()
                 .into(binding.galleryImageView)
 
+            ViewCompat.setTransitionName(binding.galleryImageView, "large_image")
+
             binding.galleryImageView.setOnClickListener {
-                imageViewClickListener.onImageClick(uri, it as ImageView)
+                imageViewClickListener.onImageClick(uri, binding.galleryImageView)
             }
         }
     }

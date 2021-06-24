@@ -8,12 +8,13 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.animation.AlphaAnimation
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.transition.TransitionInflater
 import com.sbeve.colorpal.R
 import com.sbeve.colorpal.databinding.FragmentGalleryBinding
 import com.sbeve.colorpal.main.MainActivity
@@ -73,6 +74,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SharedPreferences.O
         binding = FragmentGalleryBinding.bind(view)
         mainActivity = requireActivity() as MainActivity
 
+        exitTransition = TransitionInflater.from(requireContext()).inflateTransition(R.transition.fade)
 
         // ask for storage access if this is the first time the app has been opened
         // (don't bug the user the next time, just give them a button)
@@ -110,9 +112,9 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SharedPreferences.O
     }
 
     //play an empty animation to keep the fragment from disappearing from the background when the enter animation for other fragments is playing
-    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int) = AlphaAnimation(1.0F, 1.0F).apply {
-        duration = resources.getInteger(R.integer.animation_duration).toLong()
-    }
+//    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int) = AlphaAnimation(1.0F, 1.0F).apply {
+//        duration = resources.getInteger(R.integer.animation_duration).toLong()
+//    }
 
     // determine the layout again based on whether the user has given storage access and update the views
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
@@ -126,8 +128,8 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SharedPreferences.O
     override fun onImageClick(uri: Uri, imageView: ImageView) {
 
         // navigate to the result fragment and pass in the uri for the image to be decoded with Glide again
-        // TODO: Possibly not decode the image twice and use the same bitmap in both the fragments
-        mainActivity.navController.navigate(GalleryFragmentDirections.actionGalleryFragmentToResultFragment(uri))
+        val extras = FragmentNavigatorExtras(imageView to "large_image")
+        mainActivity.navController.navigate(GalleryFragmentDirections.actionGalleryFragmentToResultFragment(uri), extras)
     }
 
     private fun determineAndUpdateLayout() {

@@ -10,9 +10,7 @@
         tools:layout="@layout/fragment_gallery">
         <action
             android:id="@+id/action_galleryFragment_to_resultFragment"
-            app:destination="@id/resultFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/resultFragment" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
